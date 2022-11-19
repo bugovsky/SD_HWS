@@ -1,6 +1,7 @@
 import study.*;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
@@ -42,7 +43,15 @@ public class Main {
                         absentStudents.add(chosenStudent);
                     }
                 }
-                case "list" -> seminar.getStudentWithMarks();
+                case "list" -> {
+                    Map<Student, Integer> studentsWithMarks = seminar.getStudentsAndMarks();
+                    for (Student student : studentsWithMarks.keySet()) {
+                        System.out.println(student.getName() + " - " + studentsWithMarks.get(student));
+                    }
+                    if (studentsWithMarks.isEmpty()) {
+                        System.out.println("There is no students with marks");
+                    }
+                }
                 default -> System.out.println("Wrong command!");
             }
             if (absentStudents.size() == groupList.size()) {
@@ -51,7 +60,10 @@ public class Main {
             }
             if (seminar.getListOfStudentWithMarks().size() + absentStudents.size() == groupList.size()) {
                 System.out.println("\nAll students got marks");
-                seminar.getStudentWithMarks();
+                Map<Student, Integer> studentsWithMarks = seminar.getStudentsAndMarks();
+                for (Student student : studentsWithMarks.keySet()) {
+                    System.out.println(student.getName() + " - " + studentsWithMarks.get(student));
+                }
                 break;
             }
             System.out.print("\nEnter command: ");

@@ -20,23 +20,21 @@ public class Seminar {
         return this.students.get(student);
     }
 
-    public void getStudentWithMarks() {
-        boolean hasStudentWithMark = false;
-        for (Student student : this.students.keySet()) {
-            if (this.students.get(student) != null) {
-                hasStudentWithMark = true;
-                System.out.println(student.getName() + " - " + getMark(student));
-            }
-        }
-        if (!hasStudentWithMark) {
-            System.out.println("There are no students with mark");
-        }
-    }
     public ArrayList<Student> getListOfStudentWithMarks() {
         ArrayList<Student> studentsWithMarks = new ArrayList<>();
         for (Student student : this.students.keySet()) {
             if (this.students.get(student) != null) {
                 studentsWithMarks.add(student);
+            }
+        }
+        return studentsWithMarks;
+    }
+
+    public Map<Student,Integer> getStudentsAndMarks() {
+        Map<Student, Integer> studentsWithMarks = new HashMap<>();
+        for (Student student : this.students.keySet()) {
+            if (this.students.get(student) != null) {
+                studentsWithMarks.put(student, this.students.get(student));
             }
         }
         return studentsWithMarks;
